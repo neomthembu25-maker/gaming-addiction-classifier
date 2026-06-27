@@ -1,8 +1,3 @@
-"""
-GAMING ADDICTION CLASSIFIER - Simplified Version
-Binary Classification to Predict Gaming Addiction Risk
-"""
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
