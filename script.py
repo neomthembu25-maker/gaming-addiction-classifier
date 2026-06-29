@@ -75,10 +75,10 @@ target = 'addiction_binary'
 X = df_clean.drop(columns=[target])
 y = df_clean[target]
 
-# ✅ REMOVE user_id from features (FIX)
+# REMOVE user_id from features (FIX)
 if 'user_id' in X.columns:
     X = X.drop(columns=['user_id'])
-    print("✅ Dropped 'user_id' from features")
+    print("Dropped 'user_id' from features")
 
 # Identify feature types
 numeric_features = X.select_dtypes(include=[np.number]).columns.tolist()
@@ -160,7 +160,7 @@ print(comparison_df.round(4))
 # Best model
 best_name = comparison_df['F1-Score'].idxmax()
 best_pipeline = results[best_name]['pipeline']
-print(f"\n🏆 Best Model: {best_name}")
+print(f"\n Best Model: {best_name}")
 print(f"   F1-Score: {comparison_df.loc[best_name, 'F1-Score']:.4f}")
 print(f"   ROC-AUC:  {comparison_df.loc[best_name, 'ROC-AUC']:.4f}")
 
@@ -274,7 +274,7 @@ print("SAVING MODEL")
 print("=" * 60)
 
 joblib.dump(best_pipeline, 'gaming_addiction_classifier.pkl')
-print("✅ Model saved as 'gaming_addiction_classifier.pkl'")
+print("Model saved as 'gaming_addiction_classifier.pkl'")
 print("   model = joblib.load('gaming_addiction_classifier.pkl')")
 
 # ============================================================
@@ -353,12 +353,12 @@ print("\n" + "=" * 60)
 print("SUMMARY")
 print("=" * 60)
 print(f"""
-✅ Best Model: {best_name}
-✅ Accuracy:  {comparison_df.loc[best_name, 'Accuracy']:.2%}
-✅ F1-Score:  {comparison_df.loc[best_name, 'F1-Score']:.2%}
-✅ ROC-AUC:   {comparison_df.loc[best_name, 'ROC-AUC']:.2%}
+ Best Model: {best_name}
+ Accuracy:  {comparison_df.loc[best_name, 'Accuracy']:.2%}
+ F1-Score:  {comparison_df.loc[best_name, 'F1-Score']:.2%}
+ ROC-AUC:   {comparison_df.loc[best_name, 'ROC-AUC']:.2%}
 
-📁 Files Saved:
+ Files Saved:
    • gaming_addiction_classifier.pkl
    • roc_curves.png
    • model_comparison.png
