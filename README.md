@@ -78,5 +78,6 @@ Based on these findings, here are practical interventions:
 → Encourage social connections and positive in-game interactions 
 
 ---
-
-## 📂 Project Structure
+##🚀 Usage
+Train the Model
+python model.py
