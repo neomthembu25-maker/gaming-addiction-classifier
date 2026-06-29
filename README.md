@@ -78,6 +78,113 @@ Based on these findings, here are practical interventions:
 → Encourage social connections and positive in-game interactions 
 
 ---
-##🚀 Usage
-Train the Model
+## 🚀 Usage
+
+### Train the Model
+
+```bash
 python model.py
+```
+
+### Make Predictions on New Data
+
+```python
+import joblib
+import pandas as pd
+
+# Load the saved model
+model = joblib.load('gaming_addiction_classifier.pkl')
+
+# Create a sample player
+sample = pd.DataFrame({
+    'age': [25],
+    'gender': ['Male'],
+    'country': ['USA'],
+    'occupation': ['Employed'],
+    'income_level': ['Middle'],
+    'years_gaming': [13],
+    'preferred_genre': ['RPG'],
+    'platform': ['PC'],
+    'device_type': ['Laptop'],
+    'rank_tier': ['Gold'],
+    'daily_playtime_hours': [8.5],
+    'weekly_play_sessions': [10],
+    'late_night_sessions_hours': [3.0],
+    'weekend_playtime_hours': [12.0],
+    'consecutive_hours_max': [15.0],
+    'multiplayer_ratio': [0.5],
+    'toxic_chat_reports': [0],
+    'rage_quit_frequency': [0],
+    'in_game_purchases': [0],
+    'monthly_spending_usd': [30.0],
+    'lootbox_openings': [5],
+    'subscription_status': ['None'],
+    'stress_score': [8.0],
+    'loneliness_score': [7.0],
+    'dopamine_dependency_index': [6.0],
+    'self_control_score': [4.0],
+    'impulsiveness_score': [5.0],
+    'anxiety_level': [7.0],
+    'depression_indicator': [1],
+    'emotional_stability': [4.0],
+    'sleep_hours': [5.0],
+    'exercise_frequency_per_week': [1],
+    'caffeine_intake_cups_day': [3],
+    'social_interaction_hours': [2.0],
+    'relationship_status': ['Single'],
+    'gpa_or_performance_score': [3.0],
+    'missed_deadlines': [3],
+    'productivity_drop_percent': [15.0],
+    'absenteeism_days': [5],
+    'internet_speed_mbps': [80.0],
+    'screen_time_total_hours': [10.0],
+    'churn_probability': [0.5]
+})
+```
+# Make prediction
+``` python
+prediction = model.predict(sample)[0]
+probability = model.predict_proba(sample)[0][1]
+
+print(f"Prediction: {'ADDICTED' if prediction == 1 else 'NOT ADDICTED'}")
+print(f"Risk Score: {probability:.2%}")
+```
+
+**Sample Output:**
+
+```text
+============================================================
+🎮 PREDICTION RESULT
+============================================================
+
+Player Profile:
+  • Age: 25 | Gender: Male | Country: USA
+  • Daily Playtime: 8.5 hours
+  • Years Gaming: 13 years
+
+Risk Assessment:
+  • Prediction: ADDICTED
+  • Risk Score: 82.34%
+  • Risk Level: HIGH
+
+Key Risk Factors:
+  ⚠️ Daily playtime exceeds recommended limit
+  ⚠️ High stress level detected
+  ⚠️ Low self-control score
+  ⚠️ Late night gaming sessions
+  ⚠️ Social isolation indicators
+
+Recommendations:
+  • Reduce daily playtime to under 6 hours
+  • Avoid gaming after 11 PM
+  • Practice stress management techniques
+  • Increase social interactions
+```
+## 🛠️ Technologies Used
+
+- **Python** - Core language
+- **scikit-learn** - ML models
+- **XGBoost** - Best performing model
+- **pandas** - Data manipulation
+- **seaborn/Matplotlib** - Visualizations
+- **joblib** - Model serialization
