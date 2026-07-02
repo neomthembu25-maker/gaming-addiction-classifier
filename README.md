@@ -59,22 +59,23 @@ Gaming addiction is a growing concern worldwide. Early detection can help preven
 ### 💡 Actionable Insights
 
 Based on these findings, here are practical interventions:
-| ⏰ Daily Playtime Hours |
+
+| **⏰ Daily Playtime Hours** |
 → Implement playtime limits or break reminders after 2 hours
 
-| 📚 GPA/Performance Score |
+| **📚 GPA/Performance Score** |
 → Monitor academic performance; partner with schools
 
-| 🧘 Self-Control Score |
+| **🧘 Self-Control Score** |
 → Offer self-control training or mindfulness features in-game
 
-| 🌙 Late Night Sessions |
+| **🌙 Late Night Sessions** |
 → Add "bedtime mode" that discourages gaming after 11 PM
 
-| 🎯 Dopamine Dependency |
+| **🎯 Dopamine Dependency** |
 → Diversify game rewards to reduce dependency on single mechanics
 
-| 👥 Loneliness Score |
+| **👥 Loneliness Score** |
 → Encourage social connections and positive in-game interactions 
 
 ---
