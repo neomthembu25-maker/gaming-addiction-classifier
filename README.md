@@ -62,7 +62,7 @@ Based on these findings, here are practical interventions:
 ### ⏰ Daily Playtime Hours
 → Implement playtime limits or break reminders after 2 hours
 
-- ** 📚 GPA/Performance Score
+| 📚 GPA/Performance Score |
 → Monitor academic performance; partner with schools
 
 ### 🧘 Self-Control Score
