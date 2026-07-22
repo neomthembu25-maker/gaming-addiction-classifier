@@ -1,4 +1,4 @@
-# 🎮 Gaming Addiction Classifier
+#  Gaming Addiction Classifier
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -9,7 +9,7 @@
 
 ---
 
-## 📊 Overview
+##  Overview
 
 This project builds a **binary classification model** that predicts whether a gamer is at risk of addiction based on:
 
@@ -19,13 +19,13 @@ This project builds a **binary classification model** that predicts whether a ga
 - **Lifestyle Indicators** (sleep, exercise, social interaction, caffeine intake)
 - **Academic/Work Performance** (GPA, productivity, missed deadlines)
 
-### 🎯 Problem Statement
+###  Problem Statement
 
 Gaming addiction is a growing concern worldwide. Early detection can help prevent serious mental health issues, academic decline, and social isolation. This model provides a data-driven approach to identify at-risk individuals early.
 
 ---
 
-## 🚀 Key Results
+##  Key Results
 
 | Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
 |-------|----------|-----------|--------|----------|---------|
@@ -35,11 +35,11 @@ Gaming addiction is a growing concern worldwide. Early detection can help preven
 | SVM | 90.0% | 80.0% | 50.0% | 61.5% | 96.1% |
 | Random Forest | 88.0% | 66.7% | 50.0% | 57.1% | 91.7% |
 
-**🏆 Best Model:** XGBoost
+** Best Model:** XGBoost
 
 ---
 
-## 🔑 Key Findings
+##  Key Findings
 
 ### Top 10 Predictors of Gaming Addiction
 
@@ -56,30 +56,30 @@ Gaming addiction is a growing concern worldwide. Early detection can help preven
 | 9 | **Loneliness Score** | 3.5% | Social isolation is a risk factor |
 | 10 | **Screen Time Total** | 3.2% | Overall digital consumption |
 
-### 💡 Actionable Insights
+###  Actionable Insights
 
 Based on these findings, here are practical interventions:
 
-| **⏰ Daily Playtime Hours** |
+| ** Daily Playtime Hours** |
 → Implement playtime limits or break reminders after 2 hours
 
-| **📚 GPA/Performance Score** |
+| ** GPA/Performance Score** |
 → Monitor academic performance; partner with schools
 
-| **🧘 Self-Control Score** |
+| ** Self-Control Score** |
 → Offer self-control training or mindfulness features in-game
 
-| **🌙 Late Night Sessions** |
+| ** Late Night Sessions** |
 → Add "bedtime mode" that discourages gaming after 11 PM
 
-| **🎯 Dopamine Dependency** |
+| ** Dopamine Dependency** |
 → Diversify game rewards to reduce dependency on single mechanics
 
-| **👥 Loneliness Score** |
+| ** Loneliness Score** |
 → Encourage social connections and positive in-game interactions 
 
 ---
-## 🚀 Usage
+##  Usage
 
 ### Train the Model
 
@@ -155,7 +155,7 @@ print(f"Risk Score: {probability:.2%}")
 
 ```text
 ============================================================
-🎮 PREDICTION RESULT
+ PREDICTION RESULT
 ============================================================
 
 Player Profile:
@@ -169,11 +169,11 @@ Risk Assessment:
   • Risk Level: HIGH
 
 Key Risk Factors:
-  ⚠️ Daily playtime exceeds recommended limit
-  ⚠️ High stress level detected
-  ⚠️ Low self-control score
-  ⚠️ Late night gaming sessions
-  ⚠️ Social isolation indicators
+   Daily playtime exceeds recommended limit
+   High stress level detected
+   Low self-control score
+   Late night gaming sessions
+   Social isolation indicators
 
 Recommendations:
   • Reduce daily playtime to under 6 hours
@@ -181,7 +181,7 @@ Recommendations:
   • Practice stress management techniques
   • Increase social interactions
 ```
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - **Python** - Core language
 - **scikit-learn** - ML models
