@@ -20,7 +20,7 @@ The model uses 40+ features across five groups:
 | **Psychological** | stress, loneliness, self-control, impulsiveness, anxiety |
 | **Lifestyle and performance** | sleep, exercise, caffeine, social time, GPA/performance, missed deadlines |
 
-**Dataset:** [add source / link] · **Rows:** [n] · **Train/test split:** [e.g. 80/20, n test = ?]
+*
 
 ---
 
