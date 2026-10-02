@@ -77,7 +77,7 @@ The strongest predictors are the largest standardised coefficients in the Logist
 
 Psychological traits (self-control, impulsiveness, dopamine dependency) and sleep-disrupting late-night play matter at least as much as raw hours played.
 
-![Feature importance](feature_importance.png)
+![Feature importance](https://github.com/neomthembu25-maker/gaming-addiction-classifier/blob/main/Results/feature_importance.png)
 
 ---
 
@@ -89,7 +89,7 @@ cd [repo-name]
 pip install -r requirements.txt
 ```
 
-Put the Kaggle CSV at `data/gaming_addiction.csv`, then:
+Put the Kaggle CSV at `Downloads/gaming_addiction.csv`, then:
 
 ```bash
 python model.py      # trains, evaluates, saves the model and charts
