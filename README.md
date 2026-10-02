@@ -2,78 +2,84 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-> A binary classification model that predicts gaming addiction risk from behavioural, psychological and lifestyle features. The best model, XGBoost, reaches **94% accuracy** and **87.5% recall** on the held-out test set.
+# 🎮 Gaming Addiction Classifier
+
+A machine learning project that predicts whether a gamer is at risk of addiction from their gaming habits, psychological traits and lifestyle. Five models were compared with cross-validation. The best, **Logistic Regression**, reached **94% accuracy** and **0.83 F1** in cross-validation, and caught **7 of 8** addicted players on the unseen test set.
 
 ---
 
 ## 📌 Overview
 
-Gaming addiction is a growing concern, linked to poorer mental health, academic decline and social isolation. This project asks: **can a player's habits and wellbeing indicators flag addiction risk early?**
+Excessive gaming is linked to poorer mental health, falling academic or work performance, and social isolation. This project asks: **can behavioural and wellbeing indicators flag addiction risk early?**
 
-The model uses 40+ features across five groups:
+**Data:** public Kaggle dataset ([add link]) with 250 players, of whom 16.8% are labelled addicted.
+**Target:** `addiction_binary` (1 = addicted, 0 = not addicted).
+**Features:** 42 columns covering:
 
 | Group | Examples |
 |-------|----------|
-| **Demographics** | age, gender, country, occupation, income level |
-| **Gaming behaviour** | daily playtime, weekly sessions, late-night hours, platform, genre |
-| **Spending** | monthly spend, in-game purchases, loot box openings |
-| **Psychological** | stress, loneliness, self-control, impulsiveness, anxiety |
-| **Lifestyle and performance** | sleep, exercise, caffeine, social time, GPA/performance, missed deadlines |
+| Demographics | age, gender, country, occupation, income level |
+| Gaming behaviour | daily playtime, weekly sessions, late-night hours, platform, genre |
+| Spending | monthly spend, in-game purchases, loot box openings |
+| Psychological | stress, loneliness, self-control, impulsiveness, dopamine dependency |
+| Lifestyle and performance | sleep, exercise, caffeine, social time, GPA / performance, absenteeism |
 
-*
+---
+
+## ⚙️ Method
+
+1. **Remove leakage.** `addiction_binary` is simply `addiction_score > 50`, so the score and the columns derived from it (`addiction_severity`, `behavioral_cluster`, `burnout_probability`, `mental_health_risk_score`) are dropped, along with `user_id`.
+2. **Load carefully.** The value `"None"` in `subscription_status` is a real category, so it is kept instead of being read as missing.
+3. **Split.** 80% train (200 players) and 20% test (50 players), stratified so both parts keep the same share of addicted players.
+4. **Prepare inside a pipeline.** Numeric columns: median imputation, then standardisation. Text columns: one-hot encoding. Everything is fitted on training data only, so nothing leaks from the test set.
+5. **Compare models with 5-fold stratified cross-validation** on the training set: Logistic Regression, Random Forest, Gradient Boosting, SVM and XGBoost. Models are ranked by F1, because the classes are imbalanced and accuracy alone would be misleading.
+6. **Test once.** The best model is evaluated a single time on the held-out test set, then refitted on all the data and saved.
 
 ---
 
 ## 🏆 Results
 
+### Cross-validation (training set)
+
 | Model | Accuracy | Precision | Recall | F1 | ROC-AUC |
 |-------|----------|-----------|--------|----|---------|
-| **XGBoost** | **94.0%** | 77.8% | **87.5%** | **82.4%** | 97.0% |
-| Logistic Regression | 92.0% | 75.0% | 75.0% | 75.0% | **98.8%** |
-| Gradient Boosting | 92.0% | 75.0% | 75.0% | 75.0% | 95.5% |
-| SVM | 90.0% | 80.0% | 50.0% | 61.5% | 96.1% |
-| Random Forest | 88.0% | 66.7% | 50.0% | 57.1% | 91.7% |
+| **Logistic Regression** | **0.945** | 0.848 | **0.829** | **0.832** | **0.976** |
+| XGBoost | 0.925 | 0.876 | 0.681 | 0.735 | 0.955 |
+| Gradient Boosting | 0.895 | 0.719 | 0.648 | 0.674 | 0.944 |
+| SVM | 0.910 | **0.920** | 0.533 | 0.641 | 0.975 |
+| Random Forest | 0.885 | 0.693 | 0.381 | 0.488 | 0.951 |
 
-XGBoost was chosen as the best model because it has the highest accuracy, recall and F1. Recall matters most here, since missing an at-risk player is costlier than a false alarm. Logistic Regression has the highest ROC-AUC, so it remains a strong, interpretable baseline.
+Logistic Regression leads on every metric except precision, so the choice of model does not depend on which metric is used. The simplest model beat the more complex ones on this small dataset.
 
----
+### Test set (50 players, 8 addicted)
 
-## 🔍 Key Findings
+| Class | Precision | Recall | F1 |
+|-------|-----------|--------|----|
+| Not addicted | 0.98 | 0.95 | 0.96 |
+| Addicted | 0.78 | 0.88 | 0.82 |
 
-Top predictors from XGBoost feature importance:
+Accuracy **94%** · ROC-AUC **0.988**. The model caught 7 of the 8 addicted players, missed 1, and raised 2 false alarms.
 
-| Rank | Feature | Importance |
-|------|---------|-----------|
-| 1 | Daily playtime hours | 17.7% |
-| 2 | GPA / performance score | 15.2% |
-| 3 | Low income | 6.1% |
-| 4 | Self-control score | 5.6% |
-| 5 | Dopamine dependency index | 5.6% |
-| 6 | Late-night sessions | 4.6% |
-| 7 | Impulsiveness score | 4.5% |
-| 8 | Monthly spending | 3.6% |
-| 9 | Loneliness score | 3.5% |
-| 10 | Total screen time | 3.2% |
-
-**Takeaways**
-- Playtime and a drop in academic performance dominate the model's predictions.
-- Self-control, impulsiveness and dopamine dependency show that psychological traits matter alongside raw hours played.
-- Late-night play, spending and loneliness add smaller but consistent signal.
-
-**Possible interventions** (suggested by the findings, not tested):
-- Playtime limits or break reminders for heavy daily play
-- A "bedtime mode" that discourages late-night sessions
-- Self-control and mindfulness features, plus encouragement of social play
-- Early check-ins with schools or employers when performance drops
+![Confusion matrix](confusion_matrix.png)
 
 ---
 
-## ⚠️ Limitations
+## 🔍 What drives the predictions
 
-- **Small test set.** Metrics come from a limited number of test samples, so a single misclassification shifts them noticeably. Cross-validation would give more reliable estimates.
-- **Feature importance is not causation.** A high importance for income or GPA means the model uses them to predict, not that they cause addiction.
-- **Possible leakage.** Some features (e.g. performance drop, churn probability) may be consequences of addiction rather than predictors of it. Review before any real-world use.
-- **Not a diagnostic tool.** This is a learning project, not a clinical screening instrument.
+The strongest predictors are the largest standardised coefficients in the Logistic Regression model:
+
+| Rank | Feature | Coefficient size |
+|------|---------|------------------|
+| 1 | Self-control score | 1.60 |
+| 2 | Late-night gaming hours | 1.53 |
+| 3 | Impulsiveness score | 1.16 |
+| 4 | Dopamine dependency index | 0.92 |
+| 5 | Daily playtime hours | 0.85 |
+| 6 | Sleep hours | 0.77 |
+
+Psychological traits (self-control, impulsiveness, dopamine dependency) and sleep-disrupting late-night play matter at least as much as raw hours played.
+
+![Feature importance](feature_importance.png)
 
 ---
 
@@ -83,49 +89,68 @@ Top predictors from XGBoost feature importance:
 git clone https://github.com/neomthembu25-maker/[repo-name].git
 cd [repo-name]
 pip install -r requirements.txt
-python model.py          # trains the models and saves the best one
 ```
 
-### Predict for a new player
+Put the Kaggle CSV at `data/gaming_addiction.csv`, then:
+
+```bash
+python model.py      # trains, evaluates, saves the model and charts
+python predict.py    # example predictions for one player and for a whole file
+streamlit run app.py # interactive risk estimator in your browser
+```
+
+### Predicting for a new player
 
 ```python
-import joblib
-import pandas as pd
+import joblib, pandas as pd
 
 model = joblib.load("gaming_addiction_classifier.pkl")
+features = list(model.feature_names_in_)          # the 42 columns the model needs
 
-# One row containing every feature the model was trained on
-sample = pd.DataFrame({
-    "age": [25], "gender": ["Male"], "country": ["USA"],
-    "occupation": ["Employed"], "income_level": ["Middle"],
-    "daily_playtime_hours": [8.5], "late_night_sessions_hours": [3.0],
-    "stress_score": [8.0], "loneliness_score": [7.0],
-    "self_control_score": [4.0], "sleep_hours": [5.0],
-    "gpa_or_performance_score": [3.0],
-    # ... remaining features, see the full list in model.py
-})
+df = pd.read_csv("data/gaming_addiction.csv", keep_default_na=False, na_values="")
+player = df[features].iloc[[0]].copy()            # start from a real row
+player["daily_playtime_hours"] = 9.0              # change what you want
 
-prediction = model.predict(sample)[0]
-probability = model.predict_proba(sample)[0][1]
-
-print("Prediction:", "ADDICTED" if prediction == 1 else "NOT ADDICTED")
-print(f"Risk score: {probability:.2%}")
+print(model.predict_proba(player)[0, 1])          # probability of addiction
 ```
 
 ---
 
-## 🛠️ Tech Stack
+## 📁 Project Structure
 
-Python · pandas · scikit-learn · XGBoost · matplotlib / seaborn · joblib
+```
+├── data/gaming_addiction.csv
+├── model.py        # training, comparison, evaluation, saving
+├── predict.py      # single and batch predictions
+├── app.py          # Streamlit app
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## ⚠️ Limitations
+
+- **Small dataset.** With 250 players and only 8 addicted in the test set, one different prediction moves recall by about 12 points. The cross-validated scores are the more reliable result.
+- **No hyperparameter tuning**, and class imbalance (17% addicted) is not yet handled with class weights.
+- **Importance is not causation.** The model uses these features to predict, which does not mean they cause addiction.
+- **Possible remaining leakage.** Columns such as `churn_probability` and `productivity_drop_percent` may be consequences of addiction rather than early warning signs.
+- **Not a diagnostic tool.** This is an educational project trained on a public dataset, not a clinical screening instrument.
 
 ---
 
 ## 🔮 Future Work
 
-- k-fold cross-validation and hyperparameter tuning
-- SHAP values for more reliable, per-player explanations
-- Check for leakage and test on a second dataset
-- Simple web app (e.g. Streamlit) for live predictions
+- Tune hyperparameters and try class weights
+- Re-run without the borderline features to check for leakage
+- Add SHAP values to explain individual predictions
+- Validate on a second dataset
+
+---
+
+## 🛠️ Tech Stack
+
+Python · pandas · NumPy · scikit-learn · XGBoost · matplotlib · joblib · Streamlit
 
 ---
 
