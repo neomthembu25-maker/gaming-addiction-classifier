@@ -19,7 +19,7 @@ from sklearn.compose import ColumnTransformer
 
 # 1. Load Data
 
-df = pd.read_csv("C:/Users/36321389/Downloads/gaming_addiction.csv", keep_default_na=False, na_values="")
+df = pd.read_csv("Downloads/gaming_addiction.csv", keep_default_na=False, na_values="")
 print(f"rows, columns: {df.shape}")
 print(f"")
 print(df.head())
