@@ -84,8 +84,8 @@ Psychological traits (self-control, impulsiveness, dopamine dependency) and slee
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/neomthembu25-maker/[repo-name].git
-cd [repo-name]
+git clone https://github.com/neomthembu25-maker/gaming-addiction-classifier.git
+cd gaming-addiction-classifier
 pip install -r requirements.txt
 ```
 
@@ -118,7 +118,8 @@ print(model.predict_proba(player)[0, 1])          # probability of addiction
 
 ```
 ├── data/gaming_addiction.csv
-├── model.py        # training, comparison, evaluation, saving
+├── results
+├── script.py        # training, comparison, evaluation, saving
 ├── predict.py      # single and batch predictions
 ├── app.py          # Streamlit app
 ├── requirements.txt
