@@ -58,7 +58,7 @@ Logistic Regression leads on every metric except precision, so the choice of mod
 
 Accuracy **94%** · ROC-AUC **0.988**. The model caught 7 of the 8 addicted players, missed 1, and raised 2 false alarms.
 
-![Confusion matrix](confusion_matrix.png)
+![Confusion matrix](https://github.com/neomthembu25-maker/gaming-addiction-classifier/blob/main/Results/confusion_matrix.png)
 
 ---
 
