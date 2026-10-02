@@ -118,12 +118,15 @@ print(model.predict_proba(player)[0, 1])          # probability of addiction
 
 ```
 ├── data/gaming_addiction.csv
+├── models
 ├── results
-├── script.py        # training, comparison, evaluation, saving
-├── predict.py      # single and batch predictions
 ├── app.py          # Streamlit app
+├── LICENSE
+├── README.md
+├── Requirements.txt
 ├── requirements.txt
-└── README.md
+├── predict.py      # single and batch predictions
+└── script.py        # training, comparison, evaluation, saving
 ```
 
 ---
