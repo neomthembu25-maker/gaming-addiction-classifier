@@ -2,8 +2,6 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 
-# 🎮 Gaming Addiction Classifier
-
 A machine learning project that predicts whether a gamer is at risk of addiction from their gaming habits, psychological traits and lifestyle. Five models were compared with cross-validation. The best, **Logistic Regression**, reached **94% accuracy** and **0.83 F1** in cross-validation, and caught **7 of 8** addicted players on the unseen test set.
 
 ---
