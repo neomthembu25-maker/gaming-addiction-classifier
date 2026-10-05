@@ -92,7 +92,7 @@ pip install -r requirements.txt
 Put the Kaggle CSV at `Downloads/gaming_addiction.csv`, then:
 
 ```bash
-python model.py      # trains, evaluates, saves the model and charts
+python script.py      # trains, evaluates, saves the model and charts
 python predict.py    # example predictions for one player and for a whole file
 streamlit run app.py # interactive risk estimator in your browser
 ```
