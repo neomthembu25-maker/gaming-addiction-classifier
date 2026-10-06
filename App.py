@@ -15,7 +15,7 @@ def load_model():
 
 @st.cache_data
 def load_data():
-    return pd.read_csv("Downloads/gaming_addiction.csv", keep_default_na=False, na_values="")
+    return pd.read_csv("data/gaming_addiction.csv", keep_default_na=False, na_values="")
 
 
 model = load_model()
